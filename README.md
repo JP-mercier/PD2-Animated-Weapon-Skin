@@ -10,7 +10,8 @@ This mod was made by **[Siuna](https://steamcommunity.com/profiles/7656119907537
 
 <img width="2560" height="1440" alt="Inversion Universal" src="https://github.com/user-attachments/assets/7fee8cf0-5bf1-4aa8-861a-a3f1956cf0c7" />
 
-![Inversion Universal in-game](preview.mp4)
+https://github.com/user-attachments/assets/19883a24-2f3f-43f6-8b1d-69ca8cdbf6f4
+
 
 ---
 
