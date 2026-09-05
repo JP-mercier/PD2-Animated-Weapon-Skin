@@ -1,0 +1,6 @@
+<table name="Inversion Universal">
+	<AddFiles directory="assets">
+		<texture path="units/mods/animglow/inversion_df" force="true"/>
+		<texture path="units/mods/animglow/inversion_il" force="true"/>
+	</AddFiles>
+</table>

@@ -1,0 +1,108 @@
+<materials version="3" group="weapon_group">
+	<material unique="true" name="barrel" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.056 -0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="barrel_third" render_template="generic:DIFFUSE_TEXTURE:NORMALMAP" version="2">
+        <diffuse_texture file="units/mods/animglow/inversion_df"/>
+        <bump_normal_texture file="units/pd2_dlc_gage_lmg/weapons/wpn_fps_lmg_hk21_pts/wpn_third_lmg_hk21_b_long_nm"/>
+    </material>
+
+	<material unique="true" name="ergo" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0 0.08 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="fg_long" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.056 0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="fg_short" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0 -0.08 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="fg_stuff" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.056 -0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="grip" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0 0.08 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="lower" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0 -0.08 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="mag" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0.056 0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="rail" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.08 0 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="stock" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0.08 0 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+
+	<material unique="true" name="upper" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="0.056 0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+	<material unique="true" name="ak_base" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.08 0 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+	<material unique="true" name="cover" render_template="generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM" version="2">
+		<diffuse_texture file="units/mods/animglow/inversion_df"/>
+		<self_illumination_texture file="units/mods/animglow/inversion_il"/>
+		<variable name="uv_speed" value="-0.056 0.056 0" type="vector3"/>
+		<variable name="il_bloom" value="1.0" type="float"/>
+		<variable name="il_multiplier" value="5" type="scalar"/>
+	</material>
+</materials>
