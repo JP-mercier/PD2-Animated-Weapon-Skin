@@ -1,30 +1,39 @@
 """Generate everything PAYDAY 2 loads from the sources in src/.
 
 Sources:
-    src/animated.txt   <material name> <scroll direction>, for every material that gets the animated glow
-    src/static.xml     materials kept as they are (scope glass, red dots, ...), referenced by id
-    src/parts.txt      <vanilla material config> <material group or -> <material>..., one line per weapon part
+    src/animated.txt       <material name> <scroll direction>, for every material that gets the animated glow
+    src/static.xml         materials kept as they are (scope glass, red dots, ...), referenced by id
+    src/parts.txt          <vanilla material config> <material group or -> <material>..., one line per weapon part
+    src/glow_pattern.png   grayscale glow pattern, tinted with GLOW_COLOR
 
 Outputs (committed so the repo installs straight from a ZIP; don't edit them by hand):
+    assets/units/mods/inversion_universal/inversion_df.texture   base color
+    assets/units/mods/inversion_universal/inversion_il.texture   glow
     assets/units/mods/inversion_universal/materials/*.material_config
     material_configs.txt   read by lua/inversion_universal.lua
     main.xml               BeardLib file registration
 
-Usage:
+Usage (requires Pillow: pip install pillow):
     python tools/build.py
 """
 from pathlib import Path
 import sys
 import xml.etree.ElementTree as ET
 
-# ---- Look -------------------------------------------------------------------------------------
-NAMESPACE = "units/mods/inversion_universal"
-DIFFUSE = f"{NAMESPACE}/inversion_df"
-SELF_ILLUMINATION = f"{NAMESPACE}/inversion_il"
-SCROLL_SPEED = 0.08   # UV units per second
-GLOW_BLOOM = 1.0
-GLOW_MULTIPLIER = 5
-RENDER_TEMPLATE = "generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM"
+try:
+    from PIL import Image
+except ImportError:
+    sys.exit("Pillow is required: pip install pillow")
+
+# ---- Colors -----------------------------------------------------------------------------------
+GLOW_COLOR = "#12FF4D"   # color of the brightest parts of the pattern
+GLOW_BRIGHTNESS = 0.8    # 1.0 = GLOW_COLOR as is, lower is darker
+BASE_COLOR = "#000000"   # unlit surface under the glow
+
+# ---- Animation and glow -----------------------------------------------------------------------
+SCROLL_SPEED = 0.08      # UV units per second
+GLOW_MULTIPLIER = 5      # in-game glow intensity (il_multiplier)
+GLOW_BLOOM = 1.0         # il_bloom
 
 # Scroll direction in UV space (u, v), scaled by SCROLL_SPEED.
 DIRECTIONS = {
@@ -33,10 +42,39 @@ DIRECTIONS = {
 }
 # -----------------------------------------------------------------------------------------------
 
+NAMESPACE = "units/mods/inversion_universal"
+DIFFUSE = f"{NAMESPACE}/inversion_df"
+SELF_ILLUMINATION = f"{NAMESPACE}/inversion_il"
+RENDER_TEMPLATE = "generic:DEPTH_SCALING:DIFFUSE_TEXTURE:DIFFUSE_UVANIM:SELF_ILLUMINATION:SELF_ILLUMINATION_BLOOM:SELF_ILLUMINATION_UVANIM"
+BASE_SIZE = 32
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "src"
-MATERIALS = ROOT / "assets" / NAMESPACE / "materials"
+ASSETS = ROOT / "assets"
+MATERIALS = ASSETS / NAMESPACE / "materials"
 TEXTURES = [DIFFUSE, SELF_ILLUMINATION]
+
+
+def parse_color(value):
+    hex_digits = value.lstrip("#")
+    if len(hex_digits) != 6:
+        raise ValueError(f"expected a color like #12FF4D, got {value!r}")
+    return tuple(int(hex_digits[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def save_texture(image, path):
+    # PAYDAY 2 textures are DDS files with a .texture extension. DXT5, no mipmaps, like the originals.
+    image.convert("RGBA").save(ASSETS / f"{path}.texture", "DDS", pixel_format="DXT5")
+
+
+def build_textures(glow_color, base_color):
+    pattern = Image.open(SRC / "glow_pattern.png").convert("L")
+    glow = Image.merge("RGB", [
+        pattern.point(lambda v, c=channel: min(255, round(v * c / 255 * GLOW_BRIGHTNESS)))
+        for channel in glow_color
+    ])
+    save_texture(glow, SELF_ILLUMINATION)
+    save_texture(Image.new("RGB", (BASE_SIZE, BASE_SIZE), base_color), DIFFUSE)
 
 
 def number(value):
@@ -88,8 +126,17 @@ def main():
             if ref not in animated and ref not in static:
                 errors.append(f"parts.txt: {vanilla}: unknown material {ref!r}")
 
+    colors = {}
+    for setting in ("GLOW_COLOR", "BASE_COLOR"):
+        try:
+            colors[setting] = parse_color(globals()[setting])
+        except ValueError as e:
+            errors.append(f"{setting}: {e}")
+
     if errors:
         sys.exit("\n".join(errors))
+
+    build_textures(colors["GLOW_COLOR"], colors["BASE_COLOR"])
 
     MATERIALS.mkdir(parents=True, exist_ok=True)
     for old in MATERIALS.glob("*.material_config"):
@@ -112,6 +159,7 @@ def main():
     lines += ["\t</AddFiles>", "</table>", ""]
     (ROOT / "main.xml").write_text("\n".join(lines), newline="\n")
 
+    print(f"glow {GLOW_COLOR} x {GLOW_BRIGHTNESS}, base {BASE_COLOR}")
     print(f"{len(names)} material configs, {len(animated)} animated materials, {len(static)} static materials")
 
 

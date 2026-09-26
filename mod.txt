@@ -3,7 +3,7 @@
 	"description" : "Animated inversion glow on your own first-person weapons. Requires BeardLib.",
 	"author" : "Siuna",
 	"contact" : "https://steamcommunity.com/profiles/76561199075375622",
-	"version" : "2.0",
+	"version" : "2.1",
 	"blt_version" : 2,
 	"hooks" : [
 		{
